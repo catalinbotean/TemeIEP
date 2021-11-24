@@ -44,5 +44,14 @@ int main()
     ElementChimic el1 = e2;
     el1 = el1;
     e1 = e2;
+
+    //ITEM 12
+    Metal m1(1, 2);
+    Metal m2(10, 40);
+    m1.printDuritate();
+    m1.getNumarAtomic();
+    m1 = m2;
+    m1.printDuritate();
+    m1.getNumarAtomic();
     return 0;
 }

@@ -39,5 +39,10 @@ int main()
     e3 *= e2 += e1;
     e3.getNumarAtomic();
     e3.getMasaAtomica();
+
+    //ITEM 11
+    ElementChimic el1 = e2;
+    el1 = el1;
+    e1 = e2;
     return 0;
 }

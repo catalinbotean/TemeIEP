@@ -14,6 +14,8 @@ public:
     virtual ~ElementChimic();
     ElementChimic(const ElementChimic &e);
     ElementChimic &operator=(const ElementChimic &e);
+    ElementChimic &operator+=(const ElementChimic &e);
+    ElementChimic &operator*=(const ElementChimic &e);
     void setMasaAtomica(int masa);
     int getMasaAtomica();
     void setNumarAtomic(int numar);

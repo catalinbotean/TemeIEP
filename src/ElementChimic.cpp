@@ -30,6 +30,24 @@ ElementChimic &ElementChimic::operator=(const ElementChimic &e)
     return *this;
 }
 
+ElementChimic &ElementChimic::operator+=(const ElementChimic &e)
+{
+    std::cout << "+=" << std::endl;
+    this->masaAtomica += e.masaAtomica;
+    this->numarAtomic += e.numarAtomic;
+    this->nume = e.nume;
+    return *this;
+}
+
+ElementChimic &ElementChimic::operator*=(const ElementChimic &e)
+{
+    std::cout << "*=" << std::endl;
+    this->masaAtomica *= e.masaAtomica;
+    this->numarAtomic *= e.numarAtomic;
+    this->nume = e.nume;
+    return *this;
+}
+
 ElementChimic::~ElementChimic()
 {
     std::cout << "Element Chimic sters" << std::endl;
@@ -37,26 +55,31 @@ ElementChimic::~ElementChimic()
 
 void ElementChimic::setMasaAtomica(int masa)
 {
-    masaAtomica = masa;
+    std::cout << this->masaAtomica;
+    this->masaAtomica = masa;
 }
 
 int ElementChimic::getMasaAtomica()
 {
+    std::cout << "Masa Atomica: " << this->masaAtomica;
     return masaAtomica;
 }
 
 void ElementChimic::setNumarAtomic(int numar)
 {
+    std::cout << this->numarAtomic;
     numarAtomic = numar;
 }
 
 int ElementChimic::getNumarAtomic()
 {
+    std::cout << "Numar Atomic: " << this->numarAtomic;
     return numarAtomic;
 }
 
 void ElementChimic::setNume(std::string simbol)
 {
+
     nume = simbol;
 }
 

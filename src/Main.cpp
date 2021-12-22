@@ -2,11 +2,81 @@
 #include <ElementChimic.hpp>
 #include <Metal.hpp>
 #include <Nemetal.hpp>
+#include <memory>
 using namespace std;
 
 ElementChimic* factoryMethod(){
     return (new ElementChimic);
 }
+
+//ITEM14
+class Eprubeta{
+    private:
+        int lungime = 100;
+        bool plin = false;
+    
+    public:
+    Eprubeta(){
+        std::cout<<"CONSTRUCTOR1"<<std::endl;
+    }
+
+    Eprubeta(int lungime){
+        std::cout<<"CONSTRUCTOR2"<<std::endl;
+        this->lungime = lungime;
+    }
+
+    Eprubeta(const Eprubeta &e){
+        std::cout<<"COPY CONSTRUCTOR"<<std::endl;
+        this->lungime = e.lungime;
+        this->plin = e.plin;
+    }
+
+    ~Eprubeta(){
+        std::cout<<"DESTRUCTOR"<<std::endl;
+    }
+
+    int getDimensiune(){
+        return this->lungime;
+    }
+
+    bool getPlin(){
+        return this->plin;
+    }
+
+    void setPlin(bool plin){
+        this->plin = plin;
+    }
+
+    void toarnaSubstanta(ElementChimic e){
+        if(this->plin == false) 
+            std::cout<<"Vom turna elementul chimic "<<e.getNume()<<" in eprubeta"<<std::endl;
+        else
+            std::cout<<"Eprubeta trebuie curatata"<<std::endl;
+    }
+};
+
+void lock(Eprubeta &e){
+    std::cout<<"Am luat o eprubeta"<<std::endl;
+    e.setPlin(true);
+}
+
+void unlock(Eprubeta &e){
+    std::cout<<"Am curatat o eprubeta"<<std::endl;
+    e.setPlin(false);
+}
+
+class Chimist{
+    private:
+        Eprubeta &eprubeta;
+    public:
+    Chimist(Eprubeta &e):
+    eprubeta(e){
+        lock(eprubeta);
+    }
+    ~Chimist(){
+        unlock(eprubeta);
+    }
+};
 
 int main()
 {
@@ -89,5 +159,18 @@ int main()
         std::cout<<"Hidrogen3 "<<hidrogen3.use_count()<<std::endl;
         //hidrogen1->getNumarAtomic();   //SEGMENTATION FAULT
     }
+
+
+    //ITEM 14
+    Eprubeta e(200);
+    ElementChimic el(12, 24, "Mg");
+    Chimist *chimist = new Chimist(e);
+    e.toarnaSubstanta(el);
+    delete chimist;
+    e.toarnaSubstanta(el);
+    lock(e);
+    e.toarnaSubstanta(el);
+    unlock(e);
+    e.toarnaSubstanta(el);
     return 0;
 }
